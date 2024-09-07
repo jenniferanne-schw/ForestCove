@@ -1,0 +1,27 @@
+﻿@page
+@{
+	try
+	{
+		String itemid = Request["itemid"];
+
+		String connectionString = "Server=tcp:inventory321.database.windows.net,1433;Initial Catalog=Inventory;Persist Security Info=False;User ID=Jennifer;Password={Jennie200105};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+		using (SqlConnection connection = new SqlConnection(connectionString))
+		{
+			connection.Open();
+			String sql = "DELETE WHERE itemid=@itemid";
+			using (SqlCommand command = new SqlCommand(sql, connection))
+			{
+				command.Parameters.AddWithValue("@item", item);
+
+				command.ExecuteNonQuery();
+			}
+
+		}
+	}
+	catch (Exception ex)
+	{
+
+	}
+
+	Response.Redirect("/Rangsit/IndexRangsit")
+}
